@@ -11,6 +11,6 @@ def insertionSort(array):
             b -= 1
     return array
 
-# Usage: How many tests, How many integers, Between 0 and ????
+# Usage: (Sorting Algo, How many tests, How many integers, Between 0 and ????)
 testing.runTest(insertionSort, 10, 1000, 1000)
 
