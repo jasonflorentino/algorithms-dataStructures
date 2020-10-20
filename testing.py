@@ -10,16 +10,19 @@ def makeArray(count, limit):
         a.append(randrange(limit))
     return a
 
-def runTest(algo, tests, count, limit):
+def runTest(algo, tests=1, count=6, limit=10, printInputs=False, printOutputs=False, printTime=True):
     print(f"\nRunning {algo.__name__} {tests} times on")
     print(f"{count} numbers between 0 and {limit}...")
     totalTime = 0
     for test in range(tests):
         array = makeArray(count, limit)
-        # print('\nSTARTING LIST: ', array)                   # PRINT STARTING LIST
+        if printInputs == True:
+            print('\nSTARTING LIST: ', array)               # PRINT STARTING LIST
         start = time.time()
-        algo(array)                                # ALGORITHM GOES HERE
+        algo(array)                                         # ALGORITHM GOES HERE
         totalTime += time.time() - start
-        # print('\nENDING LIST: ', array)                     # PRINT SORTED LIST
+        if printOutputs == True:
+            print('\nENDING LIST: ', array)                 # PRINT SORTED LIST
     avgTime = totalTime / tests
-    print('\nAVERAGE TIME: ', round(avgTime, 4), 'seconds') # PRINT AVERAGE TIME
+    print('Complete!')
+    print('\nAVERAGE TIME: ', round(avgTime, 5), 'seconds') # PRINT AVERAGE TIME
