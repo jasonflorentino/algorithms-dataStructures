@@ -6,6 +6,12 @@ class Node {
   }
 }
 
+//         a
+//       /  \
+//     b     c
+//   /  \     \
+// d     e     f
+
 const a = new Node("a");
 const b = new Node("b");
 const c = new Node("c");
@@ -19,11 +25,24 @@ b.left = d;
 b.right = e;
 c.left = f;
 
-//         a
+//         3
 //       /  \
-//     b     c
-//   /  \     \
-// d     e     f
+//     2     5
+//   /     /  \
+// 1     4     6
+
+// const a = new Node(3);
+// const b = new Node(2);
+// const c = new Node(5);
+// const d = new Node(1);
+// const e = new Node(4);
+// const f = new Node(6);
+
+// a.left = b;
+// a.right = c;
+// b.left = d;
+// c.left = e;
+// c.right = f;
 
 const breadthFirstTraversal = (root) => {
   const queue = [ root ];
@@ -34,8 +53,6 @@ const breadthFirstTraversal = (root) => {
     if (curr.right !== null) queue.push(curr.right);
   }
 }
-
-// console.log(breadthFirstTraversal(a));
 
 const bfs = (root, target) => {
   const queue = [ root ];
