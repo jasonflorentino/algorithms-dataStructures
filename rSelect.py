@@ -2,22 +2,27 @@
 import random
 
 def partitionAroundAPivot(arr, a, b, pivotIndex):
+  # Place pivot at "end" of the array
   arr[pivotIndex], arr[b] = arr[b], arr[pivotIndex]
   pivot = arr[b]
-  l = g = a
+
+  # Maintain a less than pivot section (j),
+  # a larger than pivor section (a),
+  # and unsorted section (between a and b).
+  j = a
   while a <= b:
-    if arr[g] > pivot:
-      g += 1
+    if arr[a] > pivot:
+      a += 1
     else:
-      arr[g], arr[l] = arr[l], arr[g]
-      g += 1
-      l += 1
-    a += 1
-  return l - 1
+      arr[a], arr[j] = arr[j], arr[a]
+      a += 1
+      j += 1
+  return j - 1
 
 def rSelect(arr, a, b, targetOrder):
   pivotIndex = random.randint(a, b)
   indexOfPivot = partitionAroundAPivot(arr, a, b, pivotIndex)
+
   if indexOfPivot == targetOrder-1: return arr[indexOfPivot]
   
   if targetOrder <= indexOfPivot:
@@ -32,7 +37,7 @@ def rSelect(arr, a, b, targetOrder):
 
 # Tester 2
 arr = []
-for i in range(50):
+for i in range(1000):
   num = random.randrange(1000)
   arr.append(num)
 
