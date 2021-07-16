@@ -49,7 +49,7 @@ class LRUCache {
   tail  = new LLNode();
 
   constructor(c: number) {
-    this.capacity = c;
+    this.capacity  = c;
     this.head.next = this.tail;
     this.head.key  = "HEAD"; // Labelled for debugging
     this.tail.prev = this.head;
