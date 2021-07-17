@@ -50,13 +50,13 @@ class LRUCache {
 
   constructor(c: number) {
     this.capacity  = c;
-    this.head.next = this.tail;
     this.head.key  = "HEAD"; // Labelled for debugging
-    this.tail.prev = this.head;
+    this.head.next = this.tail;
     this.tail.key  = "TAIL"; // Labelled for debugging
+    this.tail.prev = this.head;
   }
 
-  put(key: number, val: number) {
+  put(key: number, val: number): void {
     let node = this.cache[key];
     if (node) return this._updateCache(node, key, val);
     else this._createNewNode(key, val);
@@ -72,37 +72,40 @@ class LRUCache {
     return val;
   }
 
-  _updateCache(old: LLNode, key: number, val: number) {
+  _updateCache(old: LLNode, key: number, val: number): void {
     this._deleteNode(old);
     this._createNewNode(key, val);
   }
 
-  _isFull() {
+  _isFull(): boolean {
     return this.load > this.capacity;
   }
 
-  _evict() {
+  _evict(): void {
     const oldest = this.tail.prev;
     this._deleteNode(oldest);
   }
 
-  _isAlreadyInFront(node: LLNode) {
+  _isAlreadyInFront(node: LLNode): boolean {
     const latest = this.head.next;
     return node === latest;
   }
 
-  _addToFront(node: LLNode) {
+  _addToFront(node: LLNode): void {
     if (this._isAlreadyInFront(node)) return;
 
+    // Splice node between Head and Head's next
     node.next = this.head.next;
     node.prev = this.head;
     this.head.next.prev = node;
     this.head.next      = node;
   }
 
-  _deleteNode(node: LLNode) {
+  _deleteNode(node: LLNode): void {
     const key = node.key;
 
+    // De-reference node by connecting node's 
+    // prev and next to each other instead of node
     const earlier = node.prev;
     const later   = node.next;
     earlier.next  = later;
@@ -112,7 +115,7 @@ class LRUCache {
     this.load--;
   }
 
-  _createNewNode(key: number, val: number) {
+  _createNewNode(key: number, val: number): void {
     let node = new LLNode();
     node.key = key;
     node.val = val;
