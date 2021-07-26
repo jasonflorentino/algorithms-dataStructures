@@ -3,7 +3,7 @@
  * for the LeetCode problem:
  * https://leetcode.com/problems/lru-cache/
  * 
- * At first I had a hard time getting this idea to work
+ * At first I had a hard time getting a Linked List idea to work
  * correctly. After also trying (and failing) to apply a heap,
  * I made my first working implementation simply have each 
  * value keep track of when it was last accessed, and eviction 
@@ -11,7 +11,7 @@
  * That O(n) implementation ran in 3044 ms on LeetCode,
  * but at least it was correct.
  * 
- * After another day and a bit of being tortured by this problem, 
+ * After another day of being tortured by this problem, 
  * I finally was able to get my linked list implementation to run
  * without error. Now O(1), this implementation ran in 668 ms with 
  * only a 4% increase in memory usage -- even after I 
@@ -85,22 +85,7 @@ class LRUCache {
     const oldest = this.tail.prev;
     this._deleteNode(oldest);
   }
-
-  _isAlreadyInFront(node: LLNode): boolean {
-    const latest = this.head.next;
-    return node === latest;
-  }
-
-  _addToFront(node: LLNode): void {
-    if (this._isAlreadyInFront(node)) return;
-
-    // Splice node between Head and Head's next
-    node.next = this.head.next;
-    node.prev = this.head;
-    this.head.next.prev = node;
-    this.head.next      = node;
-  }
-
+  
   _deleteNode(node: LLNode): void {
     const key = node.key;
 
@@ -114,7 +99,7 @@ class LRUCache {
     delete this.cache[key];
     this.load--;
   }
-
+  
   _createNewNode(key: number, val: number): void {
     let node = new LLNode();
     node.key = key;
@@ -123,5 +108,20 @@ class LRUCache {
     this.cache[key] = node;
     this._addToFront(node);
     this.load++;
+  }
+  
+  _addToFront(node: LLNode): void {
+    if (this._isAlreadyInFront(node)) return;
+
+    // Splice node between Head and Head's next
+    node.next = this.head.next;
+    node.prev = this.head;
+    this.head.next.prev = node;
+    this.head.next      = node;
+  }
+
+  _isAlreadyInFront(node: LLNode): boolean {
+    const latest = this.head.next;
+    return node === latest;
   }
 }
