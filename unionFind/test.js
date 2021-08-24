@@ -7,6 +7,12 @@ const UnionFind = require(`./${fileName}`);
 // Main driver
 runTestSuites(UnionFind, tests);
 
+// Commands
+const UNION_FIND = "UnionFind";
+const UNION = "union";
+const FIND = "find";
+const CONNECTED = "connected";
+
 // Function Defs
 function runTestSuites(Class, tests) {
   console.log("Running tests...");
@@ -30,18 +36,18 @@ function runTest(Tester, inCmds, inVals, outExpd) {
     const x = inVals[i][0];
     const y = inVals[i][1];
     switch (c) {
-      case "UnionFind":
+      case UNION_FIND:
         instance = new Tester(x);
         break;
-      case "union":
+      case UNION:
         result = instance.union(x, y);
         if (!expect(result, outExpd[i], c, x, y)) pass = false;
         break;
-      case "find":
+      case FIND:
         result = instance.find(x);
         if (!expect(result, outExpd[i], c, x, y)) pass = false;
         break;
-      case "connected":
+      case CONNECTED:
         result = instance.connected(x, y);
         if (!expect(result, outExpd[i], c, x, y)) pass = false;
         break;
