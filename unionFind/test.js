@@ -1,4 +1,4 @@
-const tests = require("./testCases");
+const tests = require("./tests");
 
 // Import based on script args
 const fileName = process.argv[2];
