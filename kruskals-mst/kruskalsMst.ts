@@ -22,7 +22,7 @@ console.log("Output matches:", result);
 
 /**
  * Straightforward implementation - O(mn)
- * This is better than checking the expoentially many spanning 
+ * This is better than checking the exponentially many spanning 
  * trees, but can be greatly improved by swapping the graph search
  * check for cycles O(n) with a Union-Find data structure
  * to make checking for cycles take O(1) time.
