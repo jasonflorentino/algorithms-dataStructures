@@ -1,6 +1,6 @@
 /** 
  * Class for a Union-Find data structure
- * that implements Quick Union.
+ * that implements Quick Union. (also known as Lazy Union)
  * Specifically, each array index stores that
  * vertex's parent. A `find` operatrion would now
  * need to traverse up to `n` parent pointers to
@@ -11,10 +11,10 @@
  */
  class UnionFindQuickUnion {
   constructor(size) {
-    this.root = new Array(size);
+    this.parent = new Array(size);
 
     for (let i = 0; i < size; i++) {
-      this.root[i] = i;
+      this.parent[i] = i;
     }
   }
 
@@ -24,8 +24,8 @@
    * @returns {number} The root vertex of `v`
    */
   find(v) {
-    while (v !== this.root[v]) {
-      v = this.root[v];
+    while (v !== this.parent[v]) {
+      v = this.parent[v];
     }
     return v;
   }
@@ -41,7 +41,7 @@
     const rootX = this.find(x);
     const rootY = this.find(y);
     if (rootX !== rootY) {
-      this.root[rootY] = rootX;
+      this.parent[rootY] = rootX;
     }
   }
 

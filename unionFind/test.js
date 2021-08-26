@@ -4,14 +4,14 @@ const tests = require("./tests");
 const fileName = process.argv[2];
 const UnionFind = require(`./${fileName}`);
 
-// Main driver
-runTestSuites(UnionFind, tests);
-
 // Commands
 const UNION_FIND = "UnionFind";
 const UNION = "union";
 const FIND = "find";
 const CONNECTED = "connected";
+
+// Main driver
+runTestSuites(UnionFind, tests);
 
 // Function Defs
 function runTestSuites(Class, tests) {

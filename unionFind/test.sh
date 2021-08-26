@@ -1,5 +1,5 @@
 #! /bin/bash
-FILE_NAMES="quickFind quickUnion"
+FILE_NAMES="v01_quickFind v02_quickUnion v03_UnionByRank"
 
 for FILE in $FILE_NAMES
   do
