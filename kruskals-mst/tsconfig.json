@@ -9,6 +9,6 @@
     "forceConsistentCasingInFileNames": true,
     "typeRoots": ["/usr/local/lib/node_modules/@types"]
   },
-  "include": ["kruskalsMst.ts"],
+  "include": ["kruskalsMst.ts", "test.ts"],
   "$schema": "https://json.schemastore.org/tsconfig"
 }
