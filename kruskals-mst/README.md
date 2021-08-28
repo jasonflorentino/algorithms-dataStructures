@@ -8,6 +8,8 @@ Assumptions: `G` is connected; distinct edge costs (for proof simplicty)
 Cut Property: If `e` is the cheapest edge crossing some cut `(A,B)`,
 then `e` belongs in the MST.
 
+Unlike Prim's algorithm which picks a new vertex via the cheapest edge and maintains connectivity throughout, Kruskal's algorithm picks the cheapest edge amongst all edges, building up multiple subgraphs into a single tree.
+
 ### Pseudo code
 ```
 Sort edges in order of increating cost
