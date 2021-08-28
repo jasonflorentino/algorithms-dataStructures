@@ -1,6 +1,9 @@
+const UnionFind = require("../unionFind");
+
 // Types
 type WeightedEdge = [number, number, number]
 type EdgeList = Array<WeightedEdge>
+interface LookUpTable { [prop: number]: undefined | true }
 
 // Sample Input
 const G: EdgeList = [
@@ -16,24 +19,48 @@ const MST: EdgeList = [
 ]
 
 // Main script
-const output = kuskalsMst(G);
-const result = assertEdgeListsMatch(MST, output);
-console.log("Output matches:", result);
+const fns = [kruskalsMstSimple, kruskalsMst];
+for (const fn of fns) {
+  console.log(`Running ${fn.name}...`);
+  const output = fn(G);
+  const result = assertEdgeListsMatch(MST, output);
+  console.log("Output matches:", result);
+}
 
 /**
  * Straightforward implementation - O(mn)
- * This is better than checking the exponentially many spanning 
- * trees, but can be greatly improved by swapping the graph search
- * check for cycles O(n) with a Union-Find data structure
- * to make checking for cycles take O(1) time.
- * (Actually O(alpha(n)) per Tarjan, 1975)
+ * Uses graph search to check for cycles in O(n),
+ * which is better than checking the exponentially 
+ * many spanning trees, but we can do better!
  */
-function kuskalsMst(graph: EdgeList): EdgeList {
+function kruskalsMstSimple(graph: EdgeList): EdgeList {
   graph.sort((a, b) => a[2] - b[2]);
   const T = [];
   for (const edge of graph) {
     if (!wouldMakeCycle(T, edge[0], edge[1])) {
       T.push(edge);
+    }
+  }
+  return T;
+}
+
+/**
+ * Implementation with Union-Find - O(m log m)
+ * By using a Union-Find data structure to check for 
+ * cycles in O(1) time (Actually O(alpha(n)) per Tarjan, 1975),
+ * the overall running time is now constrained by the sorting
+ * we do at the beginning.
+ */
+ function kruskalsMst(graph: EdgeList): EdgeList {
+  graph.sort((a, b) => a[2] - b[2]);
+  const V = getMaxVfromEdgeList(graph);
+  const disjointSet = new UnionFind(V + 1);
+  const T = [];
+  for (const edge of graph) {
+    const [u, v] = edge;
+    if (!disjointSet.connected(u, v)) {
+      T.push(edge);
+      disjointSet.union(u, v);
     }
   }
   return T;
@@ -49,7 +76,7 @@ function kuskalsMst(graph: EdgeList): EdgeList {
  */
 function wouldMakeCycle(g: EdgeList, s: number, t: number): boolean {
   const stack = [s];
-  const visited = {};
+  const visited: LookUpTable = {};
   while (stack.length) {
     const v = stack.pop();
     if (v === t) return true;
@@ -62,6 +89,18 @@ function wouldMakeCycle(g: EdgeList, s: number, t: number): boolean {
     }
   }
   return false;
+}
+
+// Used to get the 'number of vertices' from our edge list
+// for initializing out Disjoint Set
+function getMaxVfromEdgeList(g: EdgeList): number {
+  let highest = 0;
+  for (const edge of g) {
+    const [u, v] = edge;
+    if (u > highest) highest = u;
+    if (v > highest) highest = v;
+  }
+  return highest;
 }
 
 // Used to check if output is correct

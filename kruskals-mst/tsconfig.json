@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["/usr/local/lib/node_modules/@types"]
+  },
+  "include": ["kruskalsMst.ts"],
+  "$schema": "https://json.schemastore.org/tsconfig"
+}
