@@ -8,6 +8,23 @@ Assumptions: `G` is connected; distinct edge costs (for proof simplicty)
 Cut Property: If `e` is the cheapest edge crossing some cut `(A,B)`,
 then `e` belongs in the MST.
 
+### Pseudo code
+```
+Sort edges in order of increating cost
+Look at cheapest edge next
+if it doesn't create a cycle,
+include it in the output tree
+```
+#### Or:
+```
+sort edges 1,2,...,m so that C1 < C2 < ... < Cm
+T = []
+for i = 1 to m
+  if T + i has no cycles
+    add i to T
+return T
+```
+
 ### Sample graph
 ```
       1
@@ -34,20 +51,4 @@ G = [
 MST = [ 
   [1,2,1], [4,5,2], [2,5,3], [2,3,5] 
 ]
-```
-Pseudo code:
-```
-Sort edges in order of increating cost
-Look at cheapest edge next
-if it doesn't create a cycle,
-include it in the output tree
-```
-Or:
-```
-sort edges 1,2,...,m so that C1 < C2 < ... < Cm
-T = []
-for i = 1 to m
-  if T + i has no cycles
-    add i to T
-return T
 ```
