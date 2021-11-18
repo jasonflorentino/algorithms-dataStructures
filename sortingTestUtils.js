@@ -12,6 +12,20 @@ const { insertionSort } = require('./insertionSort');
 const { mergeSort } = require('./mergeSort');
 
 //
+// Exports
+//
+
+module.exports = {
+  assertIsSorted,
+  fisherYates,
+  logCorrectness,
+  logRuntime,
+  orderedNumbers,
+  randomNumbers,
+  uniqueShuffledNumbers
+}
+
+//
 // Example Tests
 //
 
@@ -126,18 +140,4 @@ function logRuntime(fn, arr, args = []) {
   const start = Date.now();
   fn(copy, ...args);
   console.log(Date.now() - start, 'ms');
-}
-
-//
-// Exports
-//
-
-module.exports = {
-  assertIsSorted,
-  fisherYates,
-  logCorrectness,
-  logRuntime,
-  orderedNumbers,
-  randomNumbers,
-  uniqueShuffledNumbers
 }
