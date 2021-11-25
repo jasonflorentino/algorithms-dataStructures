@@ -1,6 +1,6 @@
 # Sudoku
 
-I tried to make a procedure that solves a sudoku puzzle early on in my programming journey and quickly found that I was way out of my depth. Coming back to it nearly a year later I thought, I could definitely try my own implementation now!
+I tried to make a procedure that solves a sudoku puzzle early on in my programming journey and quickly found that I was way out of my depth. Coming back to it nearly a year later I figured I could definitely try my own implementation now!
 
 ## Contents
 - I've included 2 games: `game01.js` is really simple to make for easy testing/debugging, and `game02.js` is a real game lifted from the wikipedia page for Sudoku.
