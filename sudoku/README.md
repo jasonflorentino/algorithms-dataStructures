@@ -21,9 +21,9 @@ Function to solve a sudoku puzzle:
                         If Solve returns true
                             Return true
                         Else
-                            Set this spot to empty
+                            Set this spot to empty and try next number
                 After going through all numbers (with no valid choice)
                     Return false
-    After making it through all rows
+    After making it through all rows and spots successfully
         Return true
 ```
