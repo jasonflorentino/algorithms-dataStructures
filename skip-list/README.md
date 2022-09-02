@@ -10,9 +10,9 @@ A skip-list data structure is like a linked list, but where operations like sear
 -∞     3     4     5     6     7     8     9     ∞
 ```
 
-A skip-list with a MaxHeight of 4. The key of each node is noted below it, with Left and Right Sentinel nodes of the Min and Max key.
+Above is a skip-list with a MaxHeight of 4. The key of each node is noted below it, with Left and Right Sentinel nodes of the Min and Max key.
 Nodes are given a random height, and each layer points to the next node with a matching height.
-Searching in the list is done by traversing nodes using their next-pointers to find a key <= to the target key.
+Searching in the list is done by traversing nodes while descending their levels, using their next-pointers to find a key <= to the target key.
 
 This implementation is built from the one described in [A Simple Optimistic skip-list Algorithm (2007)](https://people.csail.mit.edu/shanir/publications/LazySkipList.pdf) by Herlihy, Lev, Luchangco, Shavit. Alongside reading the paper, I made this implementation to more closely understand the workings of the data structure. Note that, like the pseudocode in the paper, it's focussed on clarity rather than efficiency -- I've not even bothered with the locking mechanisms.
 
@@ -32,7 +32,7 @@ Run the test file
 node skipList.test.js
 ```
 
-## Use
+## Usage
 
 ```javascript
 const SkipList = require("./skipList");
